@@ -1,0 +1,7 @@
+{
+  "name": "@shineyup/streaming",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "ShineYup",
+  "license": "MIT"
+}
