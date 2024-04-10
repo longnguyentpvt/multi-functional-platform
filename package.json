@@ -1,0 +1,19 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "lint": "lerna run lint --parallel && yarn platforms-showcase-fe lint",
+    "platforms-showcase-fe": "yarn --cwd platforms-showcase/frontend",
+    "start:showcase": "yarn platforms-showcase-fe dev",
+    "prepare": "husky"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "lerna": "^8.1.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "license": "MIT"
+}

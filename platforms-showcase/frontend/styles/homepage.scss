@@ -1,0 +1,22 @@
+@import "./main.scss";
+
+.homepage__top-cover {
+  padding-bottom: 54%;
+}
+
+.homepage__top-cover-bg-img {
+  z-index: -1;
+}
+
+.homepage-top-cover__center-logo {
+  margin-top: 10%;
+  width: 12rem;
+
+  @include media-breakpoint-up(desktop)  {
+    & {
+      width: 18rem;
+    }
+  }
+  
+}
+

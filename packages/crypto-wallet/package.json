@@ -1,0 +1,7 @@
+{
+  "name": "@shineyup/crypto-wallet",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "ShineYup",
+  "license": "MIT"
+}
