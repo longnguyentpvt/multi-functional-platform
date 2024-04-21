@@ -2,5 +2,6 @@
   "eslint.workingDirectories" : [
     "./platforms-showcase/frontend",
     "./applications/streaming-server",
+    "./applications/crypto-finance-wallet-rest-server",
   ]
 }

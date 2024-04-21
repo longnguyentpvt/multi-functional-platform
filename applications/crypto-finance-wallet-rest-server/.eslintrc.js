@@ -54,18 +54,29 @@ module.exports = {
       {
         "patterns": [
           "../../*",
+          "../controllers",
+          "../modules",
           "../services",
           "../utils",
           "../data",
         ] 
       }
     ],
-    "import/no-unresolved": "error",
+    "import/no-unresolved": ["error", { ignore: ['^supertest/.+'], }],
+    "import/prefer-default-export": "off",
     "import-helpers/order-imports": [
       "error",
       {
         newlinesBetween: "always",
-        groups: ["module", "/^@app/services/", "/^@app/utils/", "/^@app/types/", "/^@app/data/"]
+        groups: [
+          "module", 
+          "/^@app/modules/", 
+          "/^@app/controllers/", 
+          "/^@app/services/", 
+          "/^@app/utils/", 
+          "/^@app/types/", 
+          "/^@app/data/"
+        ]
       }
     ]
   },

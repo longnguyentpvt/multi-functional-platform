@@ -2,9 +2,10 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "lint": "lerna run lint --parallel & yarn platforms-showcase-fe lint & yarn streaming-server-app lint",
+    "lint": "lerna run lint --parallel & yarn platforms-showcase-fe lint & yarn streaming-server-app lint & yarn crypto-finance-wallet-server lint",
     "platforms-showcase-fe": "yarn --cwd platforms-showcase/frontend",
     "streaming-server-app": "yarn --cwd applications/streaming-server",
+    "crypto-finance-wallet-server": "yarn --cwd applications/crypto-finance-wallet-rest-server",
     "start:showcase": "yarn platforms-showcase-fe dev",
     "prepare": "husky"
   },
