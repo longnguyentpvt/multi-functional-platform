@@ -1,7 +1,8 @@
 {
 	"folders": [
 		{ "path": "./platforms-showcase/frontend" },
-		{ "path": "./applications/streaming-server" }
+		{ "path": "./applications/streaming-server" },
+		{ "path": "./applications/crypto-finance-wallet-reset-server" }
 	],
 	"settings": {}
 }

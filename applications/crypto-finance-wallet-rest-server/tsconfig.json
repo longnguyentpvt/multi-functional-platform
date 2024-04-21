@@ -1,0 +1,67 @@
+{
+  "ts-node" : {
+    "require" : [
+      "tsconfig-paths/register"
+    ]
+  },
+  "compilerOptions": {
+    "paths" : {
+      "@app/controllers/*" : [
+        "./src/controllers/*"
+      ],
+      "@app/controllers" : [
+        "./src/controllers"
+      ],
+      "@app/data/*" : [
+        "./src/data/*"
+      ],
+      "@app/data" : [
+        "./src/data"
+      ],
+      "@app/services/*" : [
+        "./src/services/*"
+      ],
+      "@app/services" : [
+        "./src/services"
+      ],
+      "@app/types/*" : [
+        "./src/types/*"
+      ],
+      "@app/types" : [
+        "./src/types"
+      ],
+      "@app/utils/*" : [
+        "./src/utils/*"
+      ],
+      "@app/utils" : [
+        "./src/utils"
+      ],
+      "@app/modules/*" : [
+        "./src/modules/*"
+      ],
+      "@app/modules" : [
+        "./src/modules"
+      ]
+    },
+    "outDir" : "./dist/",
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "noImplicitAny" : true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES6",
+    "sourceMap": true,
+    "incremental": true,
+    "skipLibCheck": true
+  },
+  "include" : [
+    "./src/",
+    "__tests__"
+  ],
+  "exclude" : [
+    "node_modules",
+    "dist"
+  ]
+}
