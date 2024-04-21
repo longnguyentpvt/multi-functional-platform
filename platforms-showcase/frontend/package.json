@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint && tsc --noEmit"
   },
-  "author": "Long Nguyyen",
+  "author": "ShineYup",
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^5.3.3",

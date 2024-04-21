@@ -2,8 +2,9 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "lint": "lerna run lint --parallel && yarn platforms-showcase-fe lint",
+    "lint": "lerna run lint --parallel & yarn platforms-showcase-fe lint & yarn streaming-server-app lint",
     "platforms-showcase-fe": "yarn --cwd platforms-showcase/frontend",
+    "streaming-server-app": "yarn --cwd applications/streaming-server",
     "start:showcase": "yarn platforms-showcase-fe dev",
     "prepare": "husky"
   },

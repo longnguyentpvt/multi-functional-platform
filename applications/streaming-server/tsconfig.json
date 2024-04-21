@@ -1,0 +1,57 @@
+{
+  "ts-node" : {
+    "require" : [
+      "tsconfig-paths/register"
+    ]
+  },
+  "compilerOptions" : {
+    "paths" : {
+      "@app/data/*" : [
+        "./src/data/*"
+      ],
+      "@app/data" : [
+        "./src/data"
+      ],
+      "@app/services/*" : [
+        "./src/services/*"
+      ],
+      "@app/services" : [
+        "./src/services"
+      ],
+      "@app/types/*" : [
+        "./src/types/*"
+      ],
+      "@app/types" : [
+        "./src/types"
+      ],
+      "@app/utils/*" : [
+        "./src/utils/*"
+      ],
+      "@app/utils" : [
+        "./src/utils"
+      ]
+    },
+    "outDir" : "./dist/",
+    "esModuleInterop" : true,
+    "target" : "es6",
+    "module": "commonjs",
+    "allowJs" : true,
+    "skipLibCheck" : true,
+    "noEmit": true,
+    "moduleResolution" : "node",
+    "noImplicitAny" : true,
+    "resolveJsonModule": true,
+    "importHelpers" : false,
+    "preserveConstEnums" : true,
+    "experimentalDecorators" : true,
+    "emitDecoratorMetadata" : true,
+  },
+  "include" : [
+    "./src/",
+    "__tests__"
+  ],
+  "exclude" : [
+    "node_modules",
+    "dist"
+  ]
+}

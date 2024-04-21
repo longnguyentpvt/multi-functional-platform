@@ -1,5 +1,6 @@
 {
   "eslint.workingDirectories" : [
-    "./platforms-showcase/frontend"
+    "./platforms-showcase/frontend",
+    "./applications/streaming-server",
   ]
 }

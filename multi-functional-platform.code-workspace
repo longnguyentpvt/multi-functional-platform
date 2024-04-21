@@ -1,8 +1,7 @@
 {
 	"folders": [
-		{
-			"path": "./platforms-showcase/frontend"
-		}
+		{ "path": "./platforms-showcase/frontend" },
+		{ "path": "./applications/streaming-server" }
 	],
 	"settings": {}
 }

@@ -1,7 +1,0 @@
-{
-  "name": "@shineyup/streaming-rest-server",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "ShineYup",
-  "license": "MIT"
-}
