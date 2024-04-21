@@ -1,9 +1,10 @@
 module.exports = {
   extends: [
-    "airbnb",
+    "airbnb-base",
+    "airbnb-typescript/base",
     "plugin:@typescript-eslint/recommended",
-    "airbnb/hooks",
-    "next"
+    "plugin:import/recommended",
+    "plugin:import/typescript"
   ],
   plugins: ["@typescript-eslint", "eslint-plugin-import-helpers"],
   rules: {
@@ -16,21 +17,12 @@ module.exports = {
       }
     ],
     "max-len": ["error", { code: 120 }],
-    quotes: ["error", "double"],
+    "quotes": "off",
+    "@typescript-eslint/quotes": ["error", "double"],
     "template-curly-spacing": [
       "error",
       "always"
     ],
-    "react/jsx-filename-extension": [0, { extensions: [".tsx"] }],
-    "react/jsx-curly-spacing": [
-      "error",
-      {
-        when: "always",
-        children: true
-      }
-    ],
-    "react-hooks/exhaustive-deps": "error",
-    "react-hooks/rules-of-hooks": "error",
     "@typescript-eslint/comma-dangle": ["error", "never"],
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/no-unused-vars": ["error"],
@@ -53,14 +45,17 @@ module.exports = {
     ],
     "object-curly-spacing": "error",
     "@typescript-eslint/object-curly-spacing": ["error", "always"],
+    "import/no-useless-path-segments": ["error", {
+      noUselessIndex: true,
+    }],
     "no-restricted-imports": [
       "error",
       {
         "patterns": [
           "../../*",
-          "../components",
+          "../services",
           "../utils",
-          "../styles",
+          "../data",
         ] 
       }
     ],
@@ -69,7 +64,7 @@ module.exports = {
       "error",
       {
         newlinesBetween: "always",
-        groups: ["module", "/^@components/", "/^@utils/", "/^@styles/"]
+        groups: ["module", "/^@app/services/", "/^@app/utils/", "/^@app/types/", "/^@app/data/"]
       }
     ]
   },
