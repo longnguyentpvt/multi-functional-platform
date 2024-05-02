@@ -1,15 +1,11 @@
-import { testUtil } from "@app/utils";
+import RtmpServer from "./services/rtmp/server";
+import RtmpClient from "./services/rtmp/client";
 
-import { TEST_DATA } from "@app/data";
+const server = new RtmpServer(1935);
+server.start();
 
-const main = (): void => {
-  const test = {
-    name: "Test"
-  };
+// Create an instance of the RTMP client
+const client = new RtmpClient("localhost", 1935, "hello");
 
-  console.log("Start", TEST_DATA, test);
-
-  testUtil();
-};
-
-main();
+// Connect the client to the server
+client.connect();
