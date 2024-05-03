@@ -41,7 +41,7 @@ export default class RtmpSession extends EventEmitter {
 
   private async handshake(): Promise<void> {
     try {
-      await RtmpHandshake.performHandshake(this.socket);
+      await RtmpHandshake.serverHandshake(this.socket);
       this.emit("connect");
     } catch (error: unknown) {
       logger.error("Handshake failed:", { error });

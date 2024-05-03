@@ -30,7 +30,7 @@ export default class RtmpClient {
   }
 
   private async handshake(): Promise<void> {
-    await RtmpHandshake.performHandshake(this.socket);
+    await RtmpHandshake.clientHandshake(this.socket);
   }
 
   public publish(): void {
