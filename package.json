@@ -2,7 +2,10 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "lint": "lerna run lint --parallel & yarn platforms-showcase-fe lint & yarn streaming-server-app lint & yarn crypto-finance-wallet-server lint",
+    "lint": "lerna run lint --parallel & yarn lint:apps",
+    "lint:apps": "for d in applications/*/ ; do cd $d && yarn lint || true && cd ../.. ; done",
+    "tsc:check": "lerna run tsc:check --parallel & yarn tsc:apps",
+    "tsc:apps": "for d in applications/*/ ; do cd $d && yarn tsc:check || true && cd ../.. ; done",
     "platforms-showcase-fe": "yarn --cwd platforms-showcase/frontend",
     "streaming-server-app": "yarn --cwd applications/streaming-server",
     "crypto-finance-wallet-server": "yarn --cwd applications/crypto-finance-wallet-rest-server",

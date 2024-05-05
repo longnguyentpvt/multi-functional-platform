@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint && tsc --noEmit"
+    "lint": "next lint",
+    "tsc:check": "tsc --noEmit"
   },
   "author": "ShineYup",
   "license": "MIT",

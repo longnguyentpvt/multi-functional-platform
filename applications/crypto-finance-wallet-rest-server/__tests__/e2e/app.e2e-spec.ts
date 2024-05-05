@@ -1,7 +1,7 @@
+import { INestApplication } from "@nestjs/common";
+import { Test } from "@nestjs/testing";
 import * as request from "supertest";
 import { App } from "supertest/types";
-import { Test } from "@nestjs/testing";
-import { INestApplication } from "@nestjs/common";
 
 import AppModule from "@app/modules/app.module";
 
@@ -24,5 +24,5 @@ describe("AppController (e2e)", () => {
   it("/ (GET)", () => request(app.getHttpServer())
     .get("/")
     .expect(200)
-    .expect("Hello World!"));
+    .expect({ balance: "0" }));
 });
