@@ -75,8 +75,10 @@ module.exports = {
           "/^@app/services/", 
           "/^@app/utils/", 
           "/^@app/types/", 
-          "/^@app/data/"
-        ]
+          "/^@app/data/",
+          "/^@app/exceptions/"
+        ],
+        alphabetize: { order: "asc", ignoreCase: true }
       }
     ]
   },

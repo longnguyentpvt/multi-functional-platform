@@ -2,8 +2,7 @@ name: PR Review - Crypto Finance Wallet Rest Server
 
 on:
   pull_request:
-    types: 
-      - opened
+    types: [opened, reopened]
     branches:
       - 'dev'
     paths: 
@@ -30,6 +29,9 @@ jobs:
       - name: 'Lint Check'
         run: yarn lint
           
+      - name: 'Typescript Check'
+        run: yarn tsc:check
+
       - name: Unit Test
         run: yarn test
 

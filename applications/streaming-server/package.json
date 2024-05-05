@@ -9,7 +9,8 @@
     "start:dev": "ts-node ./src/index.ts",
     "start": "yarn build && node ./dist/index.js",
     "test": "jest --detectOpenHandles",
-    "lint": "eslint . && tsc --noEmit"
+    "lint": "eslint .",
+    "tsc:check": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/node": "20.12.5",

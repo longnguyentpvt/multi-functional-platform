@@ -69,7 +69,8 @@ module.exports = {
       "error",
       {
         newlinesBetween: "always",
-        groups: ["module", "/^@components/", "/^@utils/", "/^@styles/"]
+        groups: ["module", "/^@components/", "/^@utils/", "/^@styles/"],
+        alphabetize: { order: "asc", ignoreCase: true }
       }
     ]
   },

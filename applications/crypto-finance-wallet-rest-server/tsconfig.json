@@ -12,6 +12,18 @@
       "@app/controllers" : [
         "./src/controllers"
       ],
+      "@app/exceptions/*" : [
+        "./src/exceptions/*"
+      ],
+      "@app/exceptions" : [
+        "./src/exceptions"
+      ],
+      "@app/helpers/*" : [
+        "./src/helpers/*"
+      ],
+      "@app/helpers" : [
+        "./src/helpers"
+      ],
       "@app/data/*" : [
         "./src/data/*"
       ],
