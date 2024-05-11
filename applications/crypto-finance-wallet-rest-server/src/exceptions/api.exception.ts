@@ -4,9 +4,9 @@ import { HttpStatusCode, ErrorCode } from "./types";
 
 class ApiException extends HttpException {
   constructor(
-    private readonly code: ErrorCode,
-    private readonly errMessage: string,
-    private readonly statusCode: HttpStatusCode
+    code: ErrorCode,
+    errMessage: string,
+    statusCode: HttpStatusCode
   ) {
     super({ errorCode: code, message: errMessage }, statusCode);
   }

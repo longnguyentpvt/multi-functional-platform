@@ -4,36 +4,27 @@ on:
   pull_request:
     types: [opened, reopened]
     branches:
-      - 'dev'
-    paths: 
-      - 'applications/crypto-finance-wallet-rest-server/*'
+      - "dev"
+    paths:
+      - "applications/crypto-finance-wallet-rest-server/*"
 
 jobs:
   test:
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: ./applications/crypto-finance-wallet-rest-server
-
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '20'
+          node-version: "20"
 
-      - name: 'Install Dependencies'
+      - name: "Install Dependencies"
         run: |
           yarn install
-          yarn build
 
-      - name: 'Lint Check'
-        run: yarn lint
-          
-      - name: 'Typescript Check'
-        run: yarn tsc:check
+      - name: "Typescript Build"
+        run: yarn crypto-finance-wallet-server build
 
-      - name: Unit Test
-        run: yarn test
-
-      - name: E2E Test
-        run: yarn test:e2e
+      - name: "Testing"
+        run: |
+          yarn crypto-finance-wallet-server test
+          yarn crypto-finance-wallet-server test:e2e

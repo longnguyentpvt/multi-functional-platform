@@ -1,7 +1,16 @@
 {
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.rulers": [
+    120
+  ],
+  "eslint.validate": ["javascript", "typescript"],
   "eslint.workingDirectories" : [
     "./platforms-showcase/frontend",
     "./applications/streaming-server",
     "./applications/crypto-finance-wallet-rest-server",
-  ]
+  ],
+  "eslint.nodePath": "./node_modules",
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

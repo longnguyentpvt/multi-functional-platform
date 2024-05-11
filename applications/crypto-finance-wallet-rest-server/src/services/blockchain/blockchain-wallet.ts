@@ -6,7 +6,7 @@ import { DefaultTokenABI } from "./data";
 import { BlockChainNetwork } from "./types";
 
 export default class BlockchainWallet implements IBlockchainWallet {
-  private privateKey: string;
+  privateKey: string;
 
   private web3: Web3;
 

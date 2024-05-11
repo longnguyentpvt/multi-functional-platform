@@ -9,4 +9,5 @@ async function bootstrap(): Promise<void> {
   app.useGlobalFilters(new AllExceptionFilter());
   await app.listen(3000);
 }
+
 bootstrap();

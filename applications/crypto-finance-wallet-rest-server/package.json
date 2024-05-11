@@ -6,12 +6,11 @@
   "license": "MIT",
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,__tests__}/**/*.ts\"",
     "tsc:check": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -30,6 +29,7 @@
     "web3-eth-accounts": "^4.1.2"
   },
   "devDependencies": {
+    "@shineyup/dev-config": "1.0.0",
     "@nestjs/cli": "^10.3.1",
     "@nestjs/schematics": "^10.1.0",
     "@nestjs/testing": "^10.3.2",
