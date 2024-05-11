@@ -1,0 +1,22 @@
+{
+  "name": "@shineyup/ts-config",
+  "version": "1.0.0",
+  "description": "Shared Typescript configuration",
+  "keywords": [
+    "shineyup",
+    "config",
+    "tsconfig"
+  ],
+  "main": "./tsconfig.json",
+  "files": [
+    "tsconfig.json"
+  ],
+  "author": "ShineYup",
+  "license": "MIT",
+  "peerDependencies": {
+    "typescript" : ">=5.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

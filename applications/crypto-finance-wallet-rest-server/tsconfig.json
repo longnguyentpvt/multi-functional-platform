@@ -1,10 +1,13 @@
 {
+  "extends": "@shineyup/ts-config/tsconfig.json",
   "ts-node" : {
     "require" : [
       "tsconfig-paths/register"
     ]
   },
   "compilerOptions": {
+    "baseUrl": ".",
+    "outDir" : "dist",
     "paths" : {
       "@app/controllers/*" : [
         "./src/controllers/*"
@@ -54,19 +57,7 @@
       "@app/modules" : [
         "./src/modules"
       ]
-    },
-    "outDir" : "./dist/",
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "noImplicitAny" : true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES6",
-    "sourceMap": true,
-    "incremental": true,
-    "skipLibCheck": true
+    }
   },
   "include" : [
     "./src/",

@@ -2,10 +2,8 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "lint": "lerna run lint --parallel & yarn lint:apps",
-    "lint:apps": "for d in applications/*/ ; do cd $d && yarn lint || true && cd ../.. ; done",
-    "tsc:check": "lerna run tsc:check --parallel & yarn tsc:apps",
-    "tsc:apps": "for d in applications/*/ ; do cd $d && yarn tsc:check || true && cd ../.. ; done",
+    "lint": "lerna run lint --parallel",
+    "tsc:check": "lerna run tsc:check --parallel",
     "platforms-showcase-fe": "yarn --cwd platforms-showcase/frontend",
     "streaming-server-app": "yarn --cwd applications/streaming-server",
     "crypto-finance-wallet-server": "yarn --cwd applications/crypto-finance-wallet-rest-server",
@@ -18,7 +16,9 @@
     "lerna": "^8.1.2"
   },
   "workspaces": [
-    "packages/*"
+    "applications/*",
+    "packages/*",
+    "dev-packages/*"
   ],
   "license": "MIT"
 }
