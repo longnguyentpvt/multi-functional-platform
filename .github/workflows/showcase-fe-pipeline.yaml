@@ -3,7 +3,7 @@ name: Platform Showcase - Release
 on:
   push:
     tags:
-      - release/main/*
+      - app/platforms-showcase-fe/*
 
 jobs:
   build:

@@ -56,11 +56,13 @@ module.exports = {
         "patterns": [
           "../../*",
           "../controllers",
+          "../components",
           "../modules",
           "../services",
           "../utils",
           "../data",
-          "../exceptions/"
+          "../exceptions",
+          "../styles"
         ]
       }
     ],
@@ -74,11 +76,13 @@ module.exports = {
           "module",
           "/^@app/modules/",
           "/^@app/controllers/",
+          "/^@app/components/",
           "/^@app/services/",
           "/^@app/utils/",
           "/^@app/types/",
           "/^@app/data/",
-          "/^@app/exceptions/"
+          "/^@app/exceptions/",
+          "/^@app/styles/",
         ],
         alphabetize: { order: "asc", ignoreCase: true }
       }

@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { HomeLandingCoverImg } from "@styles/assets";
-import "@styles/homepage.scss";
+import { HomeLandingCoverImg } from "@app/styles/assets";
+import "@app/styles/homepage.scss";
 
 export default function Home(): React.ReactElement {
   return (
