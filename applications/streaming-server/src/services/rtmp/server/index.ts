@@ -1,11 +1,12 @@
-import { createServer, Server, Socket } from "net";
+import { createServer, Server as HttpServer } from "http";
+import { Server as WebSocketServer, WebSocket } from "ws";
 
 import logger from "@app/utils/logger";
 
 import RtmpSession from "./session";
 
 export default class RtmpServer {
-  private server: Server;
+  private server: WebSocketServer;
 
   private port: number;
 
@@ -13,17 +14,21 @@ export default class RtmpServer {
 
   constructor(port: number) {
     this.port = port;
-    this.server = createServer((socket: Socket) => this.onClientConnect(socket));
     this.sessions = {};
   }
 
   public start(): void {
-    this.server.listen(this.port, () => {
-      logger.info(`RTMP server is listening on port ${ this.port }`);
+    const httpServer: HttpServer = createServer();
+    this.server = new WebSocketServer({ server: httpServer });
+    this.server.on("connection", (socket: WebSocket) => {
+      this.onClientConnect(socket);
+    });
+    httpServer.listen(this.port, () => {
+      logger.info("Server is running on port 3000");
     });
   }
 
-  private onClientConnect(socket: Socket): void {
+  private onClientConnect(socket: WebSocket): void {
     logger.debug("New client connected");
 
     const session = new RtmpSession(socket);

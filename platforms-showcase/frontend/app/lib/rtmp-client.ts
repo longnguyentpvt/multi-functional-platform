@@ -1,39 +1,55 @@
-import { WebSocket } from "ws";
+import crypto from "crypto";
 
-import logger from "@app/utils/logger";
-
-import { Rtmp } from "@app/types";
-
-import RtmpHandshake from "../handshake";
+const RTMP_VERSION = 3;
+const HANDSHAKE_SIZE = 1536;
+type PublishingType = "live" | "record" | "append";
 
 export default class RtmpClient {
   private socket: WebSocket;
 
-  private serverUrl: string;
-
-  private serverPort: number;
-
   private streamName: string;
 
-  private protocol: string;
-
-  constructor(serverUrl: string, serverPort: number, streamName: string) {
-    this.serverUrl = serverUrl;
-    this.serverPort = serverPort;
+  constructor(streamName: string) {
     this.streamName = streamName;
-    this.protocol = "ws";
-  }
-
-  public connect(): void {
-    this.socket = new WebSocket(`${ this.protocol }:${ this.serverUrl }:${ this.serverPort }`);
-    this.socket.on("open", () => {
-      logger.info("Connected to RTMP server");
+    this.socket = new WebSocket("ws://localhost:1935");
+    this.socket.addEventListener("open", () => {
       this.handshake();
     });
   }
 
   private async handshake(): Promise<void> {
-    await RtmpHandshake.clientHandshake(this.socket);
+    // C0
+    const c0 = Buffer.alloc(1);
+    c0.writeUInt8(RTMP_VERSION, 0);
+    this.socket.send(c0);
+
+    // C1
+    const c1 = crypto.randomBytes(HANDSHAKE_SIZE);
+    this.socket.send(c1);
+
+    // Read the combined S0+S1+S2 message
+    const serverResponse = await this.readData(1 + HANDSHAKE_SIZE * 2);
+
+    // Extract S0, S1, and S2 from the server response
+    const s0 = serverResponse.subarray(0, 1);
+    const s1 = serverResponse.subarray(1, 1 + HANDSHAKE_SIZE);
+    const s2 = serverResponse.subarray(1 + HANDSHAKE_SIZE);
+
+    // Verify S0
+    if (s0.readUInt8(0) !== RTMP_VERSION) {
+      throw new Error("Invalid RTMP version");
+    }
+
+    // Verify S2 matches C1
+    if (!s2.equals(c1)) {
+      throw new Error("Handshake failed: S2 does not match C1");
+    }
+
+    // C2
+    const c2 = s1;
+    this.socket.send(c2);
+
+    console.debug("clientHandshake completed");
   }
 
   public publish(): void {
@@ -42,11 +58,11 @@ export default class RtmpClient {
     this.socket.send(publishCommand);
 
     // Handle server's response
-    this.socket.once("data", (data: Buffer) => {
-    // Parse server's response
-    // If the response is successful, start sending video data
-      logger.debug("Publishing stream", { dataLen: data.length });
-    // Implement sending video data to the server
+    this.socket.addEventListener("message", () => {
+      // Parse server's response
+      // If the response is successful, start sending video data
+      console.debug("Publishing stream");
+      // Implement sending video data to the server
     });
   }
 
@@ -56,10 +72,10 @@ export default class RtmpClient {
     this.socket.send(playCommand);
 
     // Handle server's response
-    this.socket.once("data", (data: Buffer) => {
+    this.socket.addEventListener("data", () => {
     // Parse server's response
     // If the response is successful, start receiving video data
-      logger.debug("Playing stream", { dataLen: data.length });
+      console.debug("Playing stream");
     // Implement receiving video data from the server
     });
   }
@@ -67,13 +83,13 @@ export default class RtmpClient {
   public disconnect(): void {
     // Close the socket connection
     this.socket.close();
-    logger.debug("Disconnected from RTMP server");
+    console.debug("Disconnected from RTMP server");
   }
 
   private createPublishCommand(): Buffer {
     const transactionId = new Date().valueOf(); // TODO: Assign a unique transaction ID
     const publishingName = this.streamName;
-    const publishingType: Rtmp.PublishingType = "live";
+    const publishingType: PublishingType = "live";
 
     const commandObject = {
       cmd: "publish",
@@ -117,5 +133,22 @@ export default class RtmpClient {
     buffer.write(commandJSON, 4);
 
     return buffer;
+  }
+
+  private async readData(size: number): Promise<Buffer> {
+    return new Promise((resolve, reject) => {
+      let data = Buffer.alloc(0);
+
+      const onData = (e: MessageEvent): void => {
+        data = Buffer.concat([data, e.data]);
+        if (data.length === size) {
+          this.socket.removeEventListener("message", onData);
+          resolve(data);
+        }
+      };
+
+      this.socket.addEventListener("message", onData);
+      this.socket.addEventListener("error", reject);
+    });
   }
 }

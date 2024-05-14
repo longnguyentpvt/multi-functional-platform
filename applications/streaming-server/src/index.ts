@@ -13,9 +13,11 @@ switch (type) {
     break;
   }
   case "--client": {
-    logger.debug("Running in client mode");
-    const client = new RtmpClient("localhost", 1935, "hello");
-    client.connect();
+    setTimeout(() => {
+      logger.debug("Running in client mode");
+      const client = new RtmpClient("localhost", 1935, "hello");
+      client.connect();
+    }, 1000);
     break;
   }
   default:

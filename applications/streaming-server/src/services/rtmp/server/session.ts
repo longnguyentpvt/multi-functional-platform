@@ -1,4 +1,4 @@
-import { Socket } from "net";
+import { WebSocket } from "ws";
 import { EventEmitter } from "events";
 
 import AMFReader from "@app/utils/amf-reader";
@@ -9,26 +9,25 @@ import { Rtmp } from "@app/types";
 import RtmpHandshake from "../handshake";
 
 export default class RtmpSession extends EventEmitter {
-  private socket: Socket;
+  private socket: WebSocket;
 
   private sessionId: string;
 
-  private publishingClients: Record<string, Socket>;
+  private publishingClients: Record<string, WebSocket>;
 
-  private playingClients: Record<string, Socket[]>;
+  private playingClients: Record<string, WebSocket[]>;
 
-  constructor(socket: Socket) {
+  constructor(socket: WebSocket) {
     super();
     this.socket = socket;
     this.sessionId = this.generateSessionId();
     this.publishingClients = {};
     this.playingClients = {};
-
-    this.socket.on("data", () => this.onSocketData.bind(this));
-    this.socket.on("close", () => this.onSocketClose.bind(this));
-    this.socket.on("error", () => this.onSocketError.bind(this));
-
-    this.handshake();
+    this.handshake().then(() => {
+      this.socket.on("message", () => this.onSocketData.bind(this));
+      this.socket.on("close", () => this.onSocketClose.bind(this));
+      this.socket.on("error", () => this.onSocketError.bind(this));
+    });
   }
 
   public get id(): string {
@@ -41,11 +40,12 @@ export default class RtmpSession extends EventEmitter {
 
   private async handshake(): Promise<void> {
     try {
+      logger.debug("Starting RTMP handshake");
       await RtmpHandshake.serverHandshake(this.socket);
       this.emit("connect");
     } catch (error: unknown) {
       logger.error("Handshake failed:", { error });
-      this.socket.destroy();
+      this.socket.close();
     }
   }
 
@@ -56,7 +56,7 @@ export default class RtmpSession extends EventEmitter {
       const headerSize = 1;
       const packetLength = data.readUInt32BE(offset + headerSize + 3);
       const packetType = data.readUInt8(offset + 1);
-      const packetData = data.slice(offset + headerSize + 11, offset + headerSize + 11 + packetLength);
+      const packetData = data.subarray(offset + headerSize + 11, offset + headerSize + 11 + packetLength);
 
       switch (packetType) {
       // Invoke
@@ -165,7 +165,7 @@ export default class RtmpSession extends EventEmitter {
     const clients = this.playingClients[streamName];
     if (clients) {
       clients.forEach((client) => {
-        client.write(data);
+        client.send(data);
       });
     }
   }
@@ -186,6 +186,6 @@ export default class RtmpSession extends EventEmitter {
 
   public close(): void {
     // Close the RTMP session
-    this.socket.destroy();
+    this.socket.close();
   }
 }
