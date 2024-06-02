@@ -2,14 +2,8 @@
   "extends": "@shineyup/ts-config/tsconfig.next.json",
   "compilerOptions": {
     "paths": {
-      "@app/components/*": [
-        "./components/*"
-      ],
-      "@app/styles/*": [
-        "./styles/*"
-      ],
-      "@app/utils/*": [
-        "./utils/*"
+      "@app/*": [
+        "./*"
       ]
     },
     "allowJs": true
