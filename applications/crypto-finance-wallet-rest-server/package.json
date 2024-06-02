@@ -29,7 +29,7 @@
     "web3-eth-accounts": "^4.1.2"
   },
   "devDependencies": {
-    "@shineyup/dev-config": "1.0.0",
+    "@shineyup/dev-config": "1.2.6",
     "@nestjs/cli": "^10.3.1",
     "@nestjs/schematics": "^10.1.0",
     "@nestjs/testing": "^10.3.2",

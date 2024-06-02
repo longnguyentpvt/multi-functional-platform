@@ -19,7 +19,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@shineyup/dev-config": "1.2.5",
+    "@shineyup/dev-config": "1.2.6",
     "@types/node": "20.12.5",
     "@types/react": "18.2.74",
     "@types/react-dom": "^18.2.24",
