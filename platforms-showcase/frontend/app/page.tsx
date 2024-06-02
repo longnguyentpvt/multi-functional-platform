@@ -14,8 +14,7 @@ export default function Home(): React.ReactElement {
               alt="ShineYup - Logo"
               src="/main-logo-with-text-shineyup.png"
               width="350"
-              height="122"
-            />
+              height="122" />
           </div>
         </div>
 
@@ -24,8 +23,7 @@ export default function Home(): React.ReactElement {
           alt="ShineYup - Home Cover"
           src={ HomeLandingCoverImg }
           width="1920"
-          height="1050"
-        />
+          height="1050" />
       </div>
     </main>
   );
