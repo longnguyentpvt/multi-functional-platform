@@ -8,54 +8,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir" : "dist",
-    "paths" : {
-      "@app/controllers/*" : [
-        "./src/controllers/*"
-      ],
-      "@app/controllers" : [
-        "./src/controllers"
-      ],
-      "@app/exceptions/*" : [
-        "./src/exceptions/*"
-      ],
-      "@app/exceptions" : [
-        "./src/exceptions"
-      ],
-      "@app/helpers/*" : [
-        "./src/helpers/*"
-      ],
-      "@app/helpers" : [
-        "./src/helpers"
-      ],
-      "@app/data/*" : [
-        "./src/data/*"
-      ],
-      "@app/data" : [
-        "./src/data"
-      ],
-      "@app/services/*" : [
-        "./src/services/*"
-      ],
-      "@app/services" : [
-        "./src/services"
-      ],
-      "@app/types/*" : [
-        "./src/types/*"
-      ],
-      "@app/types" : [
-        "./src/types"
-      ],
-      "@app/utils/*" : [
-        "./src/utils/*"
-      ],
-      "@app/utils" : [
-        "./src/utils"
-      ],
-      "@app/modules/*" : [
-        "./src/modules/*"
-      ],
-      "@app/modules" : [
-        "./src/modules"
+    "paths": {
+      "@app/*": [
+        "./src/*"
       ]
     }
   },
