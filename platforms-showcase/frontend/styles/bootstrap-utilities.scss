@@ -1,0 +1,189 @@
+@import "~bootstrap/scss/functions";
+
+$orange: #E96624;
+$light-green: #91e2c6;
+$green: #2aa876;
+$dark-green: #0a7b83;
+$primary: $green;
+$success: $green;
+$success-light: $light-green;
+$light-blue: #2a93d5;
+$blue: #145388;
+$info: $blue;
+$red: #e8505b;
+$danger: #e8505b;
+$yellow: #ffc93c;
+$yellow-light: #fff9cf;
+$warning: #ffc93c;
+$warning-light: $yellow-light;
+$pink: #e5a7f2;
+$dark: #040325;
+$body-color: $dark;
+// $body-bg: #f7f8fa;
+$body-bg: #ffffff;
+
+/* Card */
+$card-border-width: 0;
+$card-bg: #ffffff;
+$card-box-shadow: var(--bs-box-shadow-sm);
+
+$spacer: 1.2rem !default;
+
+//$card-spacer-y: $spacer * 1.6 !default;
+//$card-spacer-x: $spacer * 1.4 !default;
+
+$asset-path-prefix: "/";
+
+$font-family-source-sans: "Source Sans 3", sans-serif;
+$font-family-base: $font-family-source-sans;
+$font-size-base: 0.88rem;
+
+$min-contrast-ratio: 3;
+
+/* Typo */
+$headings-margin-bottom: 0;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-bold: 600;
+$font-weight-bolder: 700;
+$headings-font-weight: $font-weight-bold;
+
+/* Inputs */
+$input-btn-padding-y: .45rem !default;
+$input-btn-padding-y-lg: .5rem !default;
+$input-bg: #FFFFFF;
+
+/* Breadcrumb */
+$breadcrumb-margin-bottom: 0;
+$breadcrumb-divider: quote("|");
+
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
+
+// Create your own map
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        desktop: 1200px,
+        xxl: 1400px
+);
+
+$custom-colors: (
+        "white" : #FFFFFF,
+        "red": $red,
+        "pink": $pink,
+        "orange": $orange,
+        "yellow": $yellow,
+        "yellow-light": $yellow-light,
+        "light-green": $light-green,
+        "dark-green": $dark-green,
+        "green": $green,
+        "light-blue": $light-blue,
+        "blue": $blue,
+        "warning-light": $warning-light,
+        "success-light": $success-light,
+);
+
+$gray-colors: ();
+
+@each $color, $value in $grays {
+  $gray-colors: map-merge($gray-colors, ("gray-#{$color}": $value));
+}
+
+$theme-colors: map-merge-multiple($theme-colors, $custom-colors, $gray-colors);
+
+/* Spacers */
+$spacers: (
+        0: 0,
+        1: $spacer * .25,
+        2: $spacer * .5,
+        3: $spacer,
+        4: $spacer * 1.5,
+        5: $spacer * 2.5,
+        6: $spacer * 3,
+        7: $spacer * 3.5,
+        8: $spacer * 4,
+        9: $spacer * 4.5,
+        10: $spacer * 5,
+);
+
+$negative-spacers: if($enable-negative-margins, negativify-map($spacers), null);
+
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+
+/* Minxin */
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin transform($args...) {
+  -webkit-transform: $args;
+  -moz-transform: $args;
+  -ms-transform: $args;
+  -o-transform: $args;
+  transform: $args;
+}
+
+@mixin transform-origin($args...) {
+  -webkit-transform-origin: $args;
+  -moz-transform-origin: $args;
+  -ms-transform-origin: $args;
+  -o-transform-origin: $args;
+  transform-origin: $args;
+}
+
+@mixin transition-transform($duration, $timing, $delay:0s, $preface:webkit moz ms o spec) {
+  @each $browser in $preface {
+    @if ($browser == spec) {
+      transition: transform $duration $timing $delay;
+    } @else {
+      -#{$browser}-transition: -#{$browser}-transform $duration $timing $delay;
+    }
+  }
+}
+
+// Gives a card depth effect.
+// @param {Number} $depth - depth level (between 1 and 5)
+// @link http://www.google.com/design/spec/layout/layout-principles.html#layout-principles-dimensionality Google Design
+// @requires {function} top-shadow
+// @requires {function} bottom-shadow
+@mixin depth($depth) {
+  @if $depth < 1 {
+    box-shadow: none;
+  } @else if $depth > 5 {
+    @warn "Invalid $depth `#{$depth}` for mixin `card`.";
+  } @else {
+    box-shadow: bottom-shadow($depth), top-shadow($depth);
+  }
+}
+
+// Computes a top-shadow for a card effect.
+// @param {Number} $depth - depth level
+// @return {List}
+
+@function top-shadow($depth) {
+  $primary-offset: nth($shadowOffsetsTop, $depth) * 1px;
+  $blur: nth($shadowBlursTop, $depth) * 4px;
+  $color: rgba(black, nth($shadowOpacitiesTop, $depth));
+
+  @return 0 $primary-offset $blur $color;
+}
+
+// Computes a bottom-shadow for a card effect.
+// @param {Number} $depth - depth level
+// @return {List}
+@function bottom-shadow($depth) {
+  $primary-offset: nth($shadowOffsetsBottom, $depth) * 1px;
+  $blur: nth($shadowBlursBottom, $depth) * 5px;
+  $color: rgba(black, nth($shadowOpacitiesBottom, $depth));
+  @return 0 $primary-offset $blur $color;
+}
+
